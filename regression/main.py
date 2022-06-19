@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 from __future__ import print_function
 from itertools import count
+import pdb
 
 import torch
 import torch.nn.functional as F
@@ -44,9 +45,13 @@ fc = torch.nn.Linear(W_target.size(0), 1)
 for batch_idx in count(1):
     # Get data
     batch_x, batch_y = get_batch()
-
+ 
     # Reset gradients
     fc.zero_grad()
+    #Verify reset gradients
+    print(fc.weight.grad)
+    print(fc.bias.grad)
+    #https://pytorch.org/docs/stable/generated/torch.nn.Linear.html
 
     # Forward pass
     output = F.smooth_l1_loss(fc(batch_x), batch_y)
